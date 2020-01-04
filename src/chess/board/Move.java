@@ -12,6 +12,7 @@ public abstract class Move {
         this.movedPiece = movedPiece;
         this.destanationCoordinate = destanationCoordinate;
     }
+
     public static final class MajorMove extends Move {
         public MajorMove(final Board board,
                          final Piece movedPiece,
@@ -23,6 +24,7 @@ public abstract class Move {
 
     public static final class AttackMove extends Move {
         final Piece attackedPiece;
+
         public AttackMove(final Board board,
                           final Piece movedPiece,
                           final int destanationCoordinate,

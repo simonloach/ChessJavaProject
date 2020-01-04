@@ -15,7 +15,7 @@ public class BoardUtils {
     public static final int NUM_TILES_PER_ROW = 8;
 
 
-    private BoardUtils(){
+    private BoardUtils() {
         throw new RuntimeException("Nie mozesz powolac tej klasy do zycia.");
     }
 

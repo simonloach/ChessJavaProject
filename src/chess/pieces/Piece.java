@@ -18,15 +18,15 @@ public abstract class Piece {
     }
 
 
-
-    Piece(final int piecePosition, final Alliance pieceAlliance){
+    Piece(final int piecePosition, final Alliance pieceAlliance) {
         this.piecePosition = piecePosition;
         this.pieceAlliance = pieceAlliance;
         this.isFirstMove = true; //TODO fix that
     }
 
     public abstract Collection<Move> calculateLegalMoves(final Board board); //potem bedzie overridowane w subclassach
-    public boolean isFirstMove(){
+
+    public boolean isFirstMove() {
         return this.isFirstMove;
     }
 }
