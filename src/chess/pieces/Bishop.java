@@ -35,13 +35,13 @@ public class Bishop extends Piece {
                 if (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candindateDestinationCoordinate);
                     if(!candidateDestinationTile.isOccupied()){
-                        legalMoves.add(new MajorMove(board,this,candindateDestinationCoordinate));
+                        legalMoves.add(new MajorMove(board, this, candindateDestinationCoordinate));
                     } else {
                         final Piece pieceAtDest = candidateDestinationTile.getPiece();
                         final Alliance pieceAtDestAlliance = pieceAtDest.getPieceAlliance();
 
                         if (this.pieceAlliance != pieceAtDestAlliance){
-                            legalMoves.add(new AttackMove(board,this, candindateDestinationCoordinate, pieceAtDest));
+                            legalMoves.add(new AttackMove(board, this, candindateDestinationCoordinate, pieceAtDest));
                         }
                     }
                     break; // to elimnate Tile ktore sa zasloniete przez te ktore sa occupied

@@ -34,18 +34,13 @@ public class Rook extends Piece{
                 if (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candindateDestinationCoordinate);
                     if(!candidateDestinationTile.isOccupied()){
-                        legalMoves.add(new Move.MajorMove(board,
-                                this,
-                                candindateDestinationCoordinate));
+                        legalMoves.add(new Move.MajorMove(board, this, candindateDestinationCoordinate));
                     } else {
                         final Piece pieceAtDest = candidateDestinationTile.getPiece();
                         final Alliance pieceAtDestAlliance = pieceAtDest.getPieceAlliance();
 
                         if (this.pieceAlliance != pieceAtDestAlliance){
-                            legalMoves.add(new Move.AttackMove(board,
-                                    this,
-                                    candindateDestinationCoordinate,
-                                    pieceAtDest));
+                            legalMoves.add(new Move.AttackMove(board, this, candindateDestinationCoordinate, pieceAtDest));
                         }
                     }
                     break; // to elimnate Tile ktore sa zasloniete przez te ktore sa occupied

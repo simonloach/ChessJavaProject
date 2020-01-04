@@ -37,13 +37,13 @@ public class Knight extends Piece{
 
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoord); // pobieram Tile na ktory chce isc
                 if(!candidateDestinationTile.isOccupied()){ // jesli nie occupied
-                    legalMoves.add(new MajorMove(board,this,candidateDestinationCoord));
+                    legalMoves.add(new MajorMove(board, this, candidateDestinationCoord));
                 } else {
                     final Piece pieceAtDest = candidateDestinationTile.getPiece();
                     final Alliance pieceAtDestAlliance = pieceAtDest.getPieceAlliance();
 
                     if (this.pieceAlliance != pieceAtDestAlliance){
-                        legalMoves.add(new AttackMove(board,this, candidateDestinationCoord, pieceAtDest));
+                        legalMoves.add(new AttackMove(board, this, candidateDestinationCoord, pieceAtDest));
                     }
                 }
             }
