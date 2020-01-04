@@ -1,142 +1,66 @@
 import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainGUI {
+public class MainGUI extends JFrame{
     private JPanel PANEL;
-    private JPanel a1;
-    private JPanel a2;
-    private JPanel a3;
-    private JPanel a4;
-    private JPanel a5;
-    private JPanel a6;
-    private JPanel a7;
-    private JPanel a8;
-    private JPanel b1;
-    private JPanel b2;
-    private JPanel b3;
-    private JPanel b4;
-    private JPanel b5;
-    private JPanel b6;
-    private JPanel b7;
-    private JPanel b8;
-    private JPanel c1;
-    private JPanel c2;
-    private JPanel c3;
-    private JPanel c4;
-    private JPanel c5;
-    private JPanel c6;
-    private JPanel c7;
-    private JPanel c8;
-    private JPanel d1;
-    private JPanel d2;
-    private JPanel d3;
-    private JPanel d4;
-    private JPanel d5;
-    private JPanel d6;
-    private JPanel d7;
-    private JPanel d8;
-    private JPanel e1;
-    private JPanel e2;
-    private JPanel e3;
-    private JPanel e4;
-    private JPanel e5;
-    private JPanel e6;
-    private JPanel e7;
-    private JPanel e8;
-    private JPanel f1;
-    private JPanel f2;
-    private JPanel f3;
-    private JPanel f4;
-    private JPanel f5;
-    private JPanel f6;
-    private JPanel f7;
-    private JPanel f8;
-    private JPanel g1;
-    private JPanel g2;
-    private JPanel g3;
-    private JPanel g4;
-    private JPanel g5;
-    private JPanel g6;
-    private JPanel g7;
-    private JPanel g8;
-    private JPanel h1;
-    private JPanel h2;
-    private JPanel h3;
-    private JPanel h4;
-    private JPanel h5;
-    private JPanel h6;
-    private JPanel h7;
-    private JPanel h8;
-    private JLabel la1;
-    private JLabel la2;
-    private JLabel la3;
-    private JLabel la4;
-    private JLabel la5;
-    private JLabel la6;
-    private JLabel la7;
-    private JLabel la8;
-    private JLabel lb1;
-    private JLabel lb2;
-    private JLabel lb3;
-    private JLabel lb4;
-    private JLabel lb5;
-    private JLabel lb6;
-    private JLabel lb7;
-    private JLabel lb8;
-    private JLabel lc1;
-    private JLabel lc2;
-    private JLabel lc3;
-    private JLabel lc4;
-    private JLabel lc5;
-    private JLabel lc6;
-    private JLabel lc7;
-    private JLabel lc8;
-    private JLabel ld1;
-    private JLabel ld2;
-    private JLabel ld3;
-    private JLabel ld4;
-    private JLabel ld5;
-    private JLabel ld6;
-    private JLabel ld7;
-    private JLabel ld8;
-    private JLabel le1;
-    private JLabel le2;
-    private JLabel le3;
-    private JLabel le4;
-    private JLabel le5;
-    private JLabel le6;
-    private JLabel le7;
-    private JLabel le8;
-    private JLabel lf1;
-    private JLabel lf2;
-    private JLabel lf3;
-    private JLabel lf4;
-    private JLabel lf5;
-    private JLabel lf6;
-    private JLabel lf7;
-    private JLabel lf8;
-    private JLabel lg1;
-    private JLabel lg2;
-    private JLabel lg3;
-    private JLabel lg4;
-    private JLabel lg5;
-    private JLabel lg6;
-    private JLabel lg7;
-    private JLabel lg8;
-    private JLabel lh1;
-    private JLabel lh2;
-    private JLabel lh3;
-    private JLabel lh4;
-    private JLabel lh5;
-    private JLabel lh6;
-    private JLabel lh7;
-    private JLabel lh8;
+    private List<JPanel> panelList = new ArrayList<>();
+    private String[] pola = {"a8", "a7", "a6", "a5", "a4", "a3", "a2", "a1",
+            "b8", "b7", "b6", "b5", "b4", "b3", "b2", "b1"};
+
+    public void setPanelColor(Container parent) //Działa i to się liczy
+    {
+        for(Component c : parent.getComponents())
+        {
+            if(c instanceof Container)
+            {
+                if(c instanceof JPanel)
+                {
+                    c.setBackground(Color.BLACK);
+                }
+
+                setPanelColor((Container)c);
+            }
+        }
+    }
+
+    public MainGUI() {
+        GridLayout grid = new GridLayout(8,8);
+        setLayout(grid);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        int colorcheck = 1;
+        int colorswap = 1;
+        for(int i=0; i<16; i++){
+            JPanel x = new JPanel();
+            JLabel lab = new JLabel(pola[i]);
+            x.setName(pola[i]);
+            x.add(lab);
+            if(colorcheck%2 == colorswap%2){
+                x.setBackground(Color.WHITE);
+            }
+            else{
+                x.setBackground(Color.BLACK);
+            }
+            if(colorcheck == 8){
+                colorcheck = 1;
+                colorswap += 1;
+            }
+            add(x);
+        }
+
+
+        pack();
+    }
 
 
     public static void main(String[] args){
-        JFrame frame = new JFrame("CHESS");
+        /*JFrame frame = new JFrame("CHESS");
         frame.setContentPane(new MainGUI().PANEL);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(true);*/
+
+        new MainGUI().setVisible(true);
     }
 }
