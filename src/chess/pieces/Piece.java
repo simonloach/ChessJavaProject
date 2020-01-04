@@ -4,11 +4,17 @@ import chess.Alliance;
 import chess.board.Board;
 import chess.board.Move;
 
-import java.util.List;
+import java.util.Collection;
 
 public abstract class Piece {
     protected final int piecePosition;
+
     protected final Alliance pieceAlliance;
+
+    public Alliance getPieceAlliance() {
+        return pieceAlliance;
+    }
+
 
 
     Piece(final int piecePosition, final Alliance pieceAlliance){
@@ -16,6 +22,6 @@ public abstract class Piece {
         this.pieceAlliance = pieceAlliance;
     }
 
-    public abstract List<Move> calculateLegalMoves(final Board board); //potem bedzie overridowane w subclassach
+    public abstract Collection<Move> calculateLegalMoves(final Board board); //potem bedzie overridowane w subclassach
 
 }
