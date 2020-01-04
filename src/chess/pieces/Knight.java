@@ -43,7 +43,7 @@ public class Knight extends Piece{
                     final Alliance pieceAtDestAlliance = pieceAtDest.getPieceAlliance();
 
                     if (this.pieceAlliance != pieceAtDestAlliance){
-                        legalMoves.add(new AttackMove(board,this, candidateDestinationCoord, pieceAtDest);
+                        legalMoves.add(new AttackMove(board,this, candidateDestinationCoord, pieceAtDest));
                     }
                 }
             }
@@ -52,7 +52,7 @@ public class Knight extends Piece{
     }
 
     private static boolean isFirstColumn(final int currentPoss, final int candidateOffset){
-        return BoardUtils.FIRST_COLUMN[currentPoss] && ((candidateOffset == -17) || (candidateOffset == -10) || (candidateOffset == 6) || (candidateOffset== 15 );
+        return BoardUtils.FIRST_COLUMN[currentPoss] && ((candidateOffset == -17) || (candidateOffset == -10) || (candidateOffset == 6) || (candidateOffset== 15 ));
 
     }
     private static boolean isSecondColumn(final int currentPoss, final int candidateOffset){
@@ -64,7 +64,7 @@ public class Knight extends Piece{
 
     }
     private static boolean isEighthColumn(final int currentPoss, final int candidateOffset){
-        return BoardUtils.EIGHTH_COLUMN[currentPoss] && ((candidateOffset == -15) || (candidateOffset == -6) || (candidateOffset == 10) || (candidateOffset== 17);
+        return BoardUtils.EIGHTH_COLUMN[currentPoss] && ((candidateOffset == -15) || (candidateOffset == -6) || (candidateOffset == 10) || (candidateOffset== 17));
 
     }
 }
