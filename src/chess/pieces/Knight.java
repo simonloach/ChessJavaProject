@@ -4,6 +4,7 @@ import chess.Alliance;
 import chess.board.Board;
 import chess.board.BoardUtils;
 import chess.board.Move;
+import chess.board.Move.*;
 import chess.board.Tile;
 import com.google.common.collect.ImmutableList;
 
@@ -12,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class Knight extends Piece{
-    private final static int[] CANDIDATES = {-17,-15,-10,-6,6,10,15,17}; // mozliwe ruchy nie uwzgledniajac wielkosci mapy, ani czy dana kratka nie jest zajmowana przez inna figure
+    private final static int[] CANDIDATES = {-17,-15,-10,6,-6,10,15,17}; // mozliwe ruchy nie uwzgledniajac wielkosci mapy, ani czy dana kratka nie jest zajmowana przez inna figure
 
     Knight(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
@@ -21,7 +22,9 @@ public class Knight extends Piece{
 
     @Override
     public Collection<Move> calculateLegalMoves(Board board) { // tutaj jest collection bo jest ogolniej
+
         final List<Move> legalMoves = new ArrayList<>(); //ale tutaj uzywamy podklasy collection czyli listy ktora ma kolejnosc i indexy
+
         for(final int currentCandidate : CANDIDATES){ //to jest taki foreach
             int candidateDestinationCoord = this.piecePosition + currentCandidate; // zmienna ktora sprawdza w ifie czy dane pole jest git
             if(BoardUtils.isValidCandidate(candidateDestinationCoord)){ //odwolanie do funkcji ktora sprawdza czy nie wywalilo nam poza boarda (0-63 accepted only)
@@ -34,13 +37,13 @@ public class Knight extends Piece{
 
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoord); // pobieram Tile na ktory chce isc
                 if(!candidateDestinationTile.isOccupied()){ // jesli nie occupied
-                    legalMoves.add(new Move());
+                    legalMoves.add(new MajorMove(board,this,candidateDestinationCoord));
                 } else {
                     final Piece pieceAtDest = candidateDestinationTile.getPiece();
                     final Alliance pieceAtDestAlliance = pieceAtDest.getPieceAlliance();
 
                     if (this.pieceAlliance != pieceAtDestAlliance){
-                        legalMoves.add(new Move());
+                        legalMoves.add(new AttackMove(board,this, candidateDestinationCoord, pieceAtDest);
                     }
                 }
             }

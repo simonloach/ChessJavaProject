@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+
 public abstract class Tile {
     protected final int tileCoordinate;
 
@@ -15,7 +16,7 @@ public abstract class Tile {
     private static Map<Integer, Tile> createEmptyTilesMap(){
 
         final Map<Integer, Tile> emptyTileMap = new HashMap<>();
-        for( int i = 0; i < 64; i++){
+        for( int i = 0; i < BoardUtils.NUM_TILES; i++){
             emptyTileMap.put(i, new EmptyTile(i));
         }
         return ImmutableMap.copyOf(emptyTileMap); //using guava library
@@ -24,7 +25,7 @@ public abstract class Tile {
     public static Tile createTile(final int tileCoordinate, final Piece piece){
         return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILE_CACHE.get(tileCoordinate); // if
     }
-    private Tile(int tileCoordinate){
+    private Tile(final int tileCoordinate){
         this.tileCoordinate = tileCoordinate;
     }
 
@@ -54,7 +55,7 @@ public abstract class Tile {
     public static final class OccupiedTile extends Tile{
         private final Piece pieceOnTile;
 
-        private OccupiedTile(int tileCoordinate, Piece pieceOnTile){
+        private OccupiedTile(final int tileCoordinate, final Piece pieceOnTile){
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }
