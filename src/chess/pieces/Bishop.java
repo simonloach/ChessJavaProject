@@ -4,6 +4,8 @@ import chess.Alliance;
 import chess.board.Board;
 import chess.board.BoardUtils;
 import chess.board.Move;
+import chess.board.Move.MajorMove;
+import chess.board.Move.AttackMove;
 import chess.board.Tile;
 import com.google.common.collect.ImmutableList;
 
@@ -26,17 +28,20 @@ public class Bishop extends Piece {
         for (final int candidateCoordinateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {//foreach in python
             int candindateDestinationCoordinate = this.piecePosition;
             while (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
+                if(isFirstColumn(candindateDestinationCoordinate, candidateCoordinateOffset) || isEighthColumn(candindateDestinationCoordinate, candidateCoordinateOffset)){
+                    break;
+                }
                 candindateDestinationCoordinate += candidateCoordinateOffset;
                 if (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candindateDestinationCoordinate); // pobieram Tile na ktory chce isc
                     if(!candidateDestinationTile.isOccupied()){ // jesli nie occupied
-                        legalMoves.add(new Move.MajorMove(board,this,candindateDestinationCoordinate));
+                        legalMoves.add(new MajorMove(board,this,candindateDestinationCoordinate));
                     } else {
                         final Piece pieceAtDest = candidateDestinationTile.getPiece();
                         final Alliance pieceAtDestAlliance = pieceAtDest.getPieceAlliance();
 
                         if (this.pieceAlliance != pieceAtDestAlliance){
-                            legalMoves.add(new Move.AttackMove(board,this, candindateDestinationCoordinate, pieceAtDest);
+                            legalMoves.add(new AttackMove(board,this, candindateDestinationCoordinate, pieceAtDest));
                         }
                     }
                     break; // to elimnate Tile ktore sa zasloniete przez te ktore sa occupied
@@ -45,5 +50,10 @@ public class Bishop extends Piece {
         }
         return ImmutableList.copyOf(legalMoves);
     }
-    private static boolean isFirstColumn(final int currentPossition, )
+    private static boolean  isFirstColumn(final int currentPossition, final int candidateOffset){
+        return BoardUtils.FIRST_COLUMN[currentPossition] && (candidateOffset == -9 || candidateOffset == 7);
+    }
+    private static boolean  isEighthColumn(final int currentPossition, final int candidateOffset){
+        return BoardUtils.EIGHTH_COLUMN[currentPossition] && (candidateOffset == -7 || candidateOffset == 9);
+    }
 }
