@@ -25,7 +25,7 @@ public class Bishop extends Piece {
 
         final List<Move> legalMoves = new ArrayList<>();
 
-        for (final int candidateCoordinateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {//foreach in python
+        for (final int candidateCoordinateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {
             int candindateDestinationCoordinate = this.piecePosition;
             while (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
                 if(isFirstColumn(candindateDestinationCoordinate, candidateCoordinateOffset) || isEighthColumn(candindateDestinationCoordinate, candidateCoordinateOffset)){
@@ -33,8 +33,8 @@ public class Bishop extends Piece {
                 }
                 candindateDestinationCoordinate += candidateCoordinateOffset;
                 if (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
-                    final Tile candidateDestinationTile = board.getTile(candindateDestinationCoordinate); // pobieram Tile na ktory chce isc
-                    if(!candidateDestinationTile.isOccupied()){ // jesli nie occupied
+                    final Tile candidateDestinationTile = board.getTile(candindateDestinationCoordinate);
+                    if(!candidateDestinationTile.isOccupied()){
                         legalMoves.add(new MajorMove(board,this,candindateDestinationCoordinate));
                     } else {
                         final Piece pieceAtDest = candidateDestinationTile.getPiece();
