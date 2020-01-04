@@ -50,6 +50,10 @@ public class Bishop extends Piece {
         }
         return ImmutableList.copyOf(legalMoves);
     }
+    @Override
+    public String toString(){
+        return PieceType.BISHOP.toString();
+    }
 
     private static boolean isFirstColumn(final int currentPossition, final int candidateOffset) {
         return BoardUtils.FIRST_COLUMN[currentPossition] && (candidateOffset == -9 || candidateOffset == 7);

@@ -49,6 +49,11 @@ public class Queen extends Piece {
         return ImmutableList.copyOf(legalMoves);
     }
 
+    @Override
+    public String toString(){
+        return PieceType.QUEEN.toString();
+    }
+
     private static boolean isFirstColumn(final int currentPossition, final int candidateOffset) {
         return BoardUtils.FIRST_COLUMN[currentPossition] && (candidateOffset == -9 || candidateOffset == 7 || candidateOffset == -1);
     }
@@ -56,4 +61,5 @@ public class Queen extends Piece {
     private static boolean isEighthColumn(final int currentPossition, final int candidateOffset) {
         return BoardUtils.EIGHTH_COLUMN[currentPossition] && (candidateOffset == -7 || candidateOffset == 9 || candidateOffset == 1);
     }
+
 }
