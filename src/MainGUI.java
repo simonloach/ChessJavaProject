@@ -42,6 +42,27 @@ public class MainGUI extends JFrame{
         for(int i=0; i<64; i++){
             panelList.add(new JPanel());
             JLabel lab = new JLabel(pola[i]);
+            PanelListener listener = new PanelListener() {
+                @Override
+                public void mousePressed(MouseEvent mouseEvent) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent mouseEvent) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent mouseEvent) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent mouseEvent) {
+
+                }
+            };
             panelList.get(i).setName(pola[i]);
 
             if(colorcheck%2 == colorswap%2){
@@ -59,6 +80,7 @@ public class MainGUI extends JFrame{
             else {
                 colorcheck += 1;
             }
+            panelList.get(i).addMouseListener(listener);
             panelList.get(i).add(lab);
             add(panelList.get(i));
         }
@@ -71,12 +93,6 @@ public class MainGUI extends JFrame{
 
         @Override
         public void mouseClicked(MouseEvent event) {
-            /* source is the object that got clicked
-             *
-             * If the source is actually a JPanel,
-             * then will the object be parsed to JPanel
-             * since we need the setBackground() method
-             */
             Object source = event.getSource();
             if (source instanceof JPanel) {
                 JPanel panelPressed = (JPanel) source;
@@ -86,12 +102,6 @@ public class MainGUI extends JFrame{
     }
 
     public static void main(String[] args){
-        /*JFrame frame = new JFrame("CHESS");
-        frame.setContentPane(new MainGUI().PANEL);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);*/
-
         new MainGUI().setVisible(true);
     }
 }
