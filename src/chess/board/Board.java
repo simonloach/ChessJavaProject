@@ -4,10 +4,7 @@ import chess.Alliance;
 import chess.pieces.*;
 import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Board {
 
@@ -40,6 +37,9 @@ public class Board {
 
 
     private static String prettyPrint(final Tile tile){
+        if(tile.isOccupied()){
+            return tile.getPiece().getPieceAlliance().isBlack() ? tile.toString().toLowerCase() : tile.toString();
+        }
         return tile.toString();
     }
 
@@ -49,10 +49,7 @@ public class Board {
         for(final Piece piece : pieces){
             legalMoves.addAll(piece.calculateLegalMoves(this));
         }
-
-
-
-        return null;
+        return ImmutableList.copyOf(legalMoves);
     }
 
     private Collection<Piece> calculateActivePieces(List<Tile> gameBoard, Alliance alliance) {
@@ -91,10 +88,10 @@ public class Board {
         builder.setPiece(new Bishop(5, Alliance.BLACK));
         builder.setPiece(new Knight(6, Alliance.BLACK));
         builder.setPiece(new Rook(7, Alliance.BLACK));
+        builder.setPiece(new Pawn(8, Alliance.BLACK));
         for (int i = 8; i < 16; i++) {
-            builder.setPiece(new Pawn(8, Alliance.BLACK));
+            builder.setPiece(new Pawn(i, Alliance.BLACK));
         }
-
 
         builder.setPiece(new Rook(56, Alliance.WHITE));
         builder.setPiece(new Knight(57, Alliance.WHITE));
@@ -104,8 +101,8 @@ public class Board {
         builder.setPiece(new Bishop(61, Alliance.WHITE));
         builder.setPiece(new Knight(62, Alliance.WHITE));
         builder.setPiece(new Rook(63, Alliance.WHITE));
-        for (int i = 48; i < 57; i++) {
-            builder.setPiece(new Pawn(8, Alliance.WHITE));
+        for (int i = 48; i < 56; i++) {
+            builder.setPiece(new Pawn(i, Alliance.WHITE));
         }
         builder.setMoveMaker(Alliance.WHITE);
         return builder.build();
@@ -118,7 +115,7 @@ public class Board {
         Alliance nextMoveMaker;
 
         public Builder() {
-
+            this.boardConfig = new HashMap<>();
         }
 
         public Builder setPiece(final Piece piece) {
