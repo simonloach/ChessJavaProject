@@ -33,6 +33,10 @@ public class MainGUI extends JFrame{
         }
     }
 
+    public void highlightERR(JPanel panel){
+        // DO NAPISANIA !!!
+    }
+
     public MainGUI() {
         GridLayout grid = new GridLayout(8,8);
         setLayout(grid);
@@ -96,7 +100,27 @@ public class MainGUI extends JFrame{
             Object source = event.getSource();
             if (source instanceof JPanel) {
                 JPanel panelPressed = (JPanel) source;
-                panelPressed.setBackground(Color.blue);
+                //panelPressed.setBackground(Color.blue);
+                for(JPanel p : panelList)
+                {
+                    if(panelPressed.equals(p))
+                    {
+                        int x = panelList.indexOf(p);
+                        //panelList.get(x).setBackground(Color.RED);
+                        try{
+                            panelList.get(x+1).setBackground(Color.RED);
+                            panelList.get(x-1).setBackground(Color.RED);
+                            panelList.get(x+8).setBackground(Color.RED);
+                            panelList.get(x-8).setBackground(Color.RED);
+
+                            panelList.get(x+9).setBackground(Color.RED);
+                            panelList.get(x-9).setBackground(Color.RED);
+                            panelList.get(x+7).setBackground(Color.RED);
+                            panelList.get(x-7).setBackground(Color.RED);
+                        }catch (Exception ignore){}
+
+                    }
+                }
             }
         }
     }
