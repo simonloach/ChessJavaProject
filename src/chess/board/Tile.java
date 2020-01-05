@@ -10,8 +10,11 @@ import java.util.Map;
 
 public abstract class Tile {
     protected final int tileCoordinate;
-
     private static final Map<Integer, Tile> EMPTY_TILE_CACHE = createEmptyTilesMap();
+
+    public int getTileCoordinate() {
+        return tileCoordinate;
+    }
 
     private static Map<Integer, Tile> createEmptyTilesMap() {
 
