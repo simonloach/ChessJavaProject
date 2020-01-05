@@ -7,12 +7,13 @@ import java.awt.event.ActionListener;
 
 public class Table {
     private final JFrame gameFrame;
-    private static Dimension OUTER_FRAME_DIMENSION = new Dimension(600,600);
+    private final static Dimension OUTER_FRAME_DIMENSION = new Dimension(600,600);
 
     public Table(){
         this.gameFrame = new JFrame("JChess");
         final JMenuBar tableMenuBar = new JMenuBar();
         populateMenuBar(tableMenuBar);
+        this.gameFrame.setJMenuBar(tableMenuBar);
         this.gameFrame.setSize(OUTER_FRAME_DIMENSION);
         this.gameFrame.setVisible(true);
     }
