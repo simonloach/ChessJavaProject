@@ -4,8 +4,7 @@ import chess.Alliance;
 import chess.board.Board;
 import chess.board.BoardUtils;
 import chess.board.Move;
-import chess.board.Move.MajorMove;
-import chess.board.Move.AttackMove;
+import chess.board.Move.*;
 import chess.board.Tile;
 import com.google.common.collect.ImmutableList;
 
@@ -50,6 +49,12 @@ public class Bishop extends Piece {
         }
         return ImmutableList.copyOf(legalMoves);
     }
+
+    @Override
+    public Bishop movePiece(Move move) {
+        return new Bishop( move.getDestinationCoordinate(), move.getMovedPiece().getPieceAlliance());
+    }
+
     @Override
     public String toString(){
         return PieceType.BISHOP.toString();

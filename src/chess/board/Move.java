@@ -7,7 +7,7 @@ import chess.board.Board.Builder;
 public abstract class Move {
     final Board board;
     final Piece movedPiece;
-    final int destinationCoordinate;
+    protected final int destinationCoordinate;
 
     public Move(final Board board,
                 final Piece movedPiece,
@@ -15,6 +15,10 @@ public abstract class Move {
         this.board = board;
         this.movedPiece = movedPiece;
         this.destinationCoordinate = destinationCoordinate;
+    }
+
+    public Piece getMovedPiece(){
+        return this.movedPiece;
     }
 
     public int getDestinationCoordinate(){
@@ -59,8 +63,7 @@ public abstract class Move {
             for(final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()){
                 builder.setPiece(piece); //for enemy pieces tez je wrzuc do boarda
             }
-            //move the moved piece
-            builder.setPiece(null);
+            builder.setPiece(this.movedPiece.movePiece(this));
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
             return builder.build();
         }

@@ -11,19 +11,24 @@ public abstract class Piece {
     protected final int piecePosition;
     protected final Alliance pieceAlliance;
     protected final boolean isFirstMove;
-
-    public PieceType getPieceType() { return pieceType; }
-
     protected final PieceType pieceType;
 
+    public PieceType getPieceType() {
+        return pieceType;
+    }
 
     public Alliance getPieceAlliance() {
         return pieceAlliance;
     }
-    public int getPiecePosition() {return piecePosition;}
 
-    Piece(final PieceType pieceType,final int piecePosition, final Alliance pieceAlliance) {
-        this.pieceType  = pieceType;
+    public int getPiecePosition() {
+        return piecePosition;
+    }
+
+    Piece(final PieceType pieceType,
+          final int piecePosition,
+          final Alliance pieceAlliance) {
+        this.pieceType = pieceType;
         this.piecePosition = piecePosition;
         this.pieceAlliance = pieceAlliance;
         this.isFirstMove = true; //TODO fix that
@@ -35,7 +40,9 @@ public abstract class Piece {
 
     public abstract Collection<Move> calculateLegalMoves(final Board board); //potem bedzie overridowane w subclassach
 
-    public enum PieceType{
+    public abstract Piece movePiece(Move move);
+
+    public enum PieceType {
         PAWN("P") {
             @Override
             public boolean isKing() {
@@ -74,14 +81,17 @@ public abstract class Piece {
         };
 
         private String pieceName;
-        PieceType(final String pieceName){
+
+        PieceType(final String pieceName) {
             this.pieceName = pieceName;
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return this.pieceName;
         }
+
         public abstract boolean isKing();
+
     }
 }
