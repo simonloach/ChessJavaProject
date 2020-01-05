@@ -17,6 +17,7 @@ public class Board {
 
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
+    private final Player currentPlayer;
 
     private Board(Builder builder) {
         this.gameBoard = createGameBoard(builder);
@@ -28,38 +29,44 @@ public class Board {
 
         this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
-        
+        this.currentPlayer = null;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         final StringBuilder builder = new StringBuilder();
-        for(int i=0; i<BoardUtils.NUM_TILES;i++){
+        for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
             final String tileText = this.gameBoard.get(i).toString();
             builder.append(String.format("%3s", tileText));
-            if( (i+1) % BoardUtils.NUM_TILES_PER_ROW == 0){
+            if ((i + 1) % BoardUtils.NUM_TILES_PER_ROW == 0) {
                 builder.append("\n");
             }
         }
         return builder.toString();
     }
 
-    public Player blackPlayer(){
+    public Player blackPlayer() {
         return this.blackPlayer;
     }
-    public Player whitePlayer(){
+
+    public Player whitePlayer() {
         return this.whitePlayer;
     }
 
-    public Collection<Piece> getBlackPieces(){
+    public Player currentPlayer() {
+        return this.currentPlayer;
+    }
+
+    public Collection<Piece> getBlackPieces() {
         return this.blackPieces;
     }
-    public Collection<Piece> getWhitePieces(){
+
+    public Collection<Piece> getWhitePieces() {
         return this.whitePieces;
     }
 
-    private static String prettyPrint(final Tile tile){
-        if(tile.isOccupied()){
+    private static String prettyPrint(final Tile tile) {
+        if (tile.isOccupied()) {
             return tile.getPiece().getPieceAlliance().isBlack() ? tile.toString().toLowerCase() : tile.toString();
         }
         return tile.toString();
@@ -68,7 +75,7 @@ public class Board {
     private Collection<Move> calculateLegalMoves(Collection<Piece> pieces) {
 
         final List<Move> legalMoves = new ArrayList<>();
-        for(final Piece piece : pieces){
+        for (final Piece piece : pieces) {
             legalMoves.addAll(piece.calculateLegalMoves(this));
         }
         return ImmutableList.copyOf(legalMoves);

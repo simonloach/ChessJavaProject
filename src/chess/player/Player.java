@@ -26,6 +26,14 @@ public abstract class Player {
         this.isInCheck = !Player.calculateAttacksOnTile(this.playerKing.getPiecePosition(), opponentMoves).isEmpty(); // przekazujedo calculateattacks coordy króla i ruchy oponenta
     }
 
+    public King getPlayerKing(){
+        return this.playerKing;
+    }
+
+    public Collection<Move> getLegalMoves(){
+        return this.legalMoves;
+    }
+
     private static Collection<Move> calculateAttacksOnTile(int piecePosition, Collection<Move> moves) { //sprawdzam czy dla kazdego ruchu opponenta, jesli ktorys z ruchow overlapuje z krolem to znaczy ze jest in check
         final List<Move> attackMoves = new ArrayList<>();
         for(final Move move : moves){
@@ -56,7 +64,7 @@ public abstract class Player {
     public boolean isInCheckMate(){
         return this.isInCheck && !hasEscapeMoves();
     }
-    // TODO IMPLEMENT METHODS BELOW
+
     public boolean isInStaleMate(){
         return !this.isInCheck && !hasEscapeMoves();
     }
@@ -75,7 +83,17 @@ public abstract class Player {
         return false;
     }
     public MoveTransition makeMove(final Move move){
-        return null;
+        if(!isMoveLegal(move)){
+            return new MoveTransition(this.board, move, MoveStatus.ILLEGAL_MOVE); // jak ruch jest niemozliwy, zwroc ten sam board, i wyrzuc illegal move
+        }
+        final Board transitionBoard = move.execute();
+
+        final Collection<Move> kingAttacks = Player.calculateAttacksOnTile(transitionBoard.currentPlayer().getOpponent().getPlayerKing().getPiecePosition(), // wez pozycje krola przeciwnika(tak naprawde swoja) i sprawdz czy dostanie
+                transitionBoard.currentPlayer().getLegalMoves());
+        if(!kingAttacks.isEmpty()){
+            return new MoveTransition(this.board, move, MoveStatus.LEAVES_PLAYER_IN_CHECK); // jesli sa ataki na krola, tez zwroc ten sam board, i powiedz graczowi ze ma checka
+        }
+        return new MoveTransition(transitionBoard, move, MoveStatus.DONE); //
     }
 
     protected abstract Collection<Piece> getActivePieces();
