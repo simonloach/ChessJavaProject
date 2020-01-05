@@ -96,7 +96,7 @@ public abstract class Player {
         return new MoveTransition(transitionBoard, move, MoveStatus.DONE); //
     }
 
-    protected abstract Collection<Piece> getActivePieces();
+    public abstract Collection<Piece> getActivePieces();
     public abstract Alliance getAlliance();
     public abstract Player getOpponent();
 

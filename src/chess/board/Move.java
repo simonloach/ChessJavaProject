@@ -1,21 +1,25 @@
 package chess.board;
 
+
 import chess.pieces.Piece;
+import chess.board.Board.Builder;
 
 public abstract class Move {
     final Board board;
     final Piece movedPiece;
-    final int destanationCoordinate;
+    final int destinationCoordinate;
 
-    public Move(Board board, Piece movedPiece, int destanationCoordinate) {
+    public Move(final Board board,
+                final Piece movedPiece,
+                final int destinationCoordinate) {
         this.board = board;
         this.movedPiece = movedPiece;
-        this.destanationCoordinate = destanationCoordinate;
+        this.destinationCoordinate = destinationCoordinate;
     }
 
     public int getDestinationCoordinate(){
-        return this.destanationCoordinate;
-    };
+        return this.destinationCoordinate;
+    }
 
     public abstract Board execute();
 
@@ -32,7 +36,6 @@ public abstract class Move {
         }
     }
 
-
     public static final class AttackMove extends Move {
         final Piece attackedPiece;
 
@@ -46,7 +49,20 @@ public abstract class Move {
 
         @Override
         public Board execute() {
-            return null;
+            final Builder builder = new Builder();
+            for(final Piece piece : this.board.currentPlayer().getActivePieces()){
+                //todo HASHCODE AND EQUALS FOR PIECES
+                if(!this.movedPiece.equals(piece)){
+                    builder.setPiece(piece); //for tych ktorych nie ruszalismy, poprostu je wstaw
+                }
+            }
+            for(final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()){
+                builder.setPiece(piece); //for enemy pieces tez je wrzuc do boarda
+            }
+            //move the moved piece
+            builder.setPiece(null);
+            builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+            return builder.build();
         }
     }
 
