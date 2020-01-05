@@ -3,6 +3,7 @@ package chess.board;
 import chess.Alliance;
 import chess.pieces.*;
 import chess.player.BlackPlayer;
+import chess.player.Player;
 import chess.player.WhitePlayer;
 import com.google.common.collect.ImmutableList;
 
@@ -41,6 +42,13 @@ public class Board {
             }
         }
         return builder.toString();
+    }
+
+    public Player blackPlayer(){
+        return this.blackPlayer;
+    }
+    public Player whitePlayer(){
+        return this.whitePlayer;
     }
 
     public Collection<Piece> getBlackPieces(){
