@@ -3,8 +3,11 @@ package chess.player;
 import chess.Alliance;
 import chess.board.Board;
 import chess.board.Move;
+import chess.board.Move.KingSideCastleMove;
+import chess.board.Move.QueenSideCastleMove;
 import chess.board.Tile;
 import chess.pieces.Piece;
+import chess.pieces.Rook;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
@@ -39,26 +42,34 @@ public class BlackPlayer extends Player {
     protected Collection<Move> calculateKingCastles(final Collection<Move> playerLegals,
                                                     final Collection<Move> opponentLegals) {
         final List<Move> kingCastles = new ArrayList<>();
-        if( this.playerKing.isFirstMove() && !this.isInCheck() ){
+        if (this.playerKing.isFirstMove() && !this.isInCheck()) {
             //black king side castle
-            if(  !this.board.getTile(5).isOccupied()  &&  !this.board.getTile(6).isOccupied() ){
+            if (!this.board.getTile(5).isOccupied() && !this.board.getTile(6).isOccupied()) {
                 final Tile rookTile = this.board.getTile(7);
-                if(rookTile.isOccupied() && rookTile.getPiece().isFirstMove()){
-                    if( Player.calculateAttacksOnTile(5, opponentLegals).isEmpty() &&
+                if (rookTile.isOccupied() && rookTile.getPiece().isFirstMove()) {
+                    if (Player.calculateAttacksOnTile(5, opponentLegals).isEmpty() &&
                             Player.calculateAttacksOnTile(6, opponentLegals).isEmpty() &&
-                            rookTile.getPiece().getPieceType().isRook()){
-                        //TODO ADD A CASTLEMOVE!
-                        kingCastles.add(null);
+                            rookTile.getPiece().getPieceType().isRook()) {
+                        kingCastles.add(new KingSideCastleMove(this.board,
+                                this.playerKing,
+                                6,
+                                (Rook) rookTile.getPiece(),
+                                rookTile.getTileCoordinate(),
+                                5));
                     }
                 }
             }
-            if(  !this.board.getTile(1).isOccupied()  &&
+            if (!this.board.getTile(1).isOccupied() &&
                     !this.board.getTile(2).isOccupied() &&
-                    !this.board.getTile(3).isOccupied() ){
+                    !this.board.getTile(3).isOccupied()) {
                 final Tile rookTile = this.board.getTile(0);
-                if(rookTile.isOccupied() && rookTile.getPiece().isFirstMove()){
-                    //TODO ADD A CASTLEMOVE
-                    kingCastles.add(null);
+                if (rookTile.isOccupied() && rookTile.getPiece().isFirstMove()) {
+                    kingCastles.add(new QueenSideCastleMove(this.board,
+                            this.playerKing,
+                            2,
+                            (Rook) rookTile.getPiece(),
+                            rookTile.getTileCoordinate(),
+                            3));
                 }
             }
         }
