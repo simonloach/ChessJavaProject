@@ -3,8 +3,6 @@ package chess.player;
 import chess.board.Board;
 import chess.board.Move;
 
-import java.util.concurrent.Future;
-
 public class MoveTransition {
 
     private final Board transitionBoard;

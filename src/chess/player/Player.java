@@ -7,7 +7,6 @@ import chess.pieces.King;
 import chess.pieces.Piece;
 import com.google.common.collect.ImmutableList;
 
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
