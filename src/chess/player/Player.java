@@ -7,6 +7,7 @@ import chess.pieces.King;
 import chess.pieces.Piece;
 import com.google.common.collect.ImmutableList;
 
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +35,7 @@ public abstract class Player {
         return this.legalMoves;
     }
 
-    private static Collection<Move> calculateAttacksOnTile(int piecePosition, Collection<Move> moves) { //sprawdzam czy dla kazdego ruchu opponenta, jesli ktorys z ruchow overlapuje z krolem to znaczy ze jest in check
+    protected static Collection<Move> calculateAttacksOnTile(int piecePosition, Collection<Move> moves) { //sprawdzam czy dla kazdego ruchu opponenta, jesli ktorys z ruchow overlapuje z krolem to znaczy ze jest in check
         final List<Move> attackMoves = new ArrayList<>();
         for(final Move move : moves){
             if(piecePosition == move.getDestinationCoordinate()){
@@ -99,5 +100,6 @@ public abstract class Player {
     public abstract Collection<Piece> getActivePieces();
     public abstract Alliance getAlliance();
     public abstract Player getOpponent();
+    protected abstract Collection<Move> calculateKingCastles(Collection<Move> playerLegals, Collection<Move> opponentLegals);
 
 }
