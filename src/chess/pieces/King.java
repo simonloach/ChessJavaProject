@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.player.Alliance;
+import chess.Alliance;
 import chess.board.Board;
 import chess.board.BoardUtils;
 import chess.board.Move;
@@ -12,26 +12,33 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class King extends Piece{
+public class King extends Piece {
 
     private final static int[] CANDIDATE_MOVE_COORDINATE = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    public King(final int piecePosition, final Alliance pieceAlliance) {
-        super(PieceType.KING, piecePosition, pieceAlliance);
+    public King(final int piecePosition,
+                final Alliance pieceAlliance) {
+        super(PieceType.KING, piecePosition, pieceAlliance, true);
+    }
+
+    public King(final int piecePosition,
+                final Alliance pieceAlliance,
+                final boolean isFirstMove) {
+        super(PieceType.KING, piecePosition, pieceAlliance, isFirstMove);
     }
 
     @Override
     public Collection<Move> calculateLegalMoves(Board board) {
         final List<Move> legalMoves = new ArrayList<>();
-        for(final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATE){
+        for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATE) {
             final int currentCandidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
-            if(isFirstColumn(this.piecePosition,currentCandidateOffset) ||
-                    isEighthColumn(this.piecePosition,currentCandidateOffset)){
+            if (isFirstColumn(this.piecePosition, currentCandidateOffset) ||
+                    isEighthColumn(this.piecePosition, currentCandidateOffset)) {
                 continue;
             }
 
-            if(BoardUtils.isValidCandidate(currentCandidateDestinationCoordinate)){
+            if (BoardUtils.isValidCandidate(currentCandidateDestinationCoordinate)) {
                 final Tile candidateDestinationTile = board.getTile(currentCandidateDestinationCoordinate);
                 if (!candidateDestinationTile.isOccupied()) { // jesli nie occupied
                     legalMoves.add(new MajorMove(board, this, currentCandidateDestinationCoordinate));
@@ -53,11 +60,11 @@ public class King extends Piece{
 
     @Override
     public King movePiece(Move move) {
-        return new King( move.getDestinationCoordinate(), move.getMovedPiece().getPieceAlliance());
+        return new King(move.getDestinationCoordinate(), move.getMovedPiece().getPieceAlliance());
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return PieceType.KING.toString();
     }
 

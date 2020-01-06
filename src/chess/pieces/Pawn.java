@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.player.Alliance;
+import chess.Alliance;
 import chess.board.Board;
 import chess.board.BoardUtils;
 import chess.board.Move;
@@ -13,8 +13,14 @@ import java.util.List;
 public class Pawn extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATE = {7, 8, 9, 16};
 
-    public Pawn(final int piecePosition, final Alliance pieceAlliance) {
-        super(PieceType.PAWN, piecePosition, pieceAlliance);
+    public Pawn(final int piecePosition,
+                final Alliance pieceAlliance) {
+        super(PieceType.PAWN, piecePosition, pieceAlliance,true);
+    }
+    public Pawn(final int piecePosition,
+                final Alliance pieceAlliance,
+                final boolean isFirstMove) {
+        super(PieceType.PAWN, piecePosition, pieceAlliance,isFirstMove);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package chess.player;
+package chess;
 
 import chess.player.BlackPlayer;
 import chess.player.Player;
@@ -24,7 +24,7 @@ public enum Alliance {
         @Override
         public Player choosePlayer(final WhitePlayer whitePlayer,
                                    final BlackPlayer blackPlayer) {
-            return blackPlayer;
+            return whitePlayer;
         }
     },
     BLACK {
@@ -46,7 +46,7 @@ public enum Alliance {
         @Override
         public Player choosePlayer(final WhitePlayer whitePlayer,
                                    final BlackPlayer blackPlayer) {
-            return whitePlayer;
+            return blackPlayer;
         }
     };
 
