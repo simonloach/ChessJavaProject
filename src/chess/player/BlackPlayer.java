@@ -46,15 +46,8 @@ public class BlackPlayer extends Player {
             if (!this.board.getTile(5).isOccupied() && !this.board.getTile(6).isOccupied()) {
                 final Tile rookTile = this.board.getTile(7);
                 if (rookTile.isOccupied() && rookTile.getPiece().isFirstMove()) {
-                    if (Player.calculateAttacksOnTile(5, opponentLegals).isEmpty() &&
-                            Player.calculateAttacksOnTile(6, opponentLegals).isEmpty() &&
-                            rookTile.getPiece().getPieceType().isRook()) {
-                        kingCastles.add(new KingSideCastleMove(this.board,
-                                this.playerKing,
-                                6,
-                                (Rook) rookTile.getPiece(),
-                                rookTile.getTileCoordinate(),
-                                5));
+                    if (Player.calculateAttacksOnTile(5, opponentLegals).isEmpty() && Player.calculateAttacksOnTile(6, opponentLegals).isEmpty() && rookTile.getPiece().getPieceType().isRook()) {
+                        kingCastles.add(new KingSideCastleMove(this.board, this.playerKing, 6, (Rook) rookTile.getPiece(), rookTile.getTileCoordinate(), 5));
                     }
                 }
             }
@@ -63,12 +56,9 @@ public class BlackPlayer extends Player {
                     !this.board.getTile(3).isOccupied()) {
                 final Tile rookTile = this.board.getTile(0);
                 if (rookTile.isOccupied() && rookTile.getPiece().isFirstMove()) {
-                    kingCastles.add(new QueenSideCastleMove(this.board,
-                            this.playerKing,
-                            2,
-                            (Rook) rookTile.getPiece(),
-                            rookTile.getTileCoordinate(),
-                            3));
+                    if (Player.calculateAttacksOnTile(2, opponentLegals).isEmpty() && Player.calculateAttacksOnTile(3, opponentLegals).isEmpty() && rookTile.getPiece().getPieceType().isRook()) {
+                        kingCastles.add(new QueenSideCastleMove(this.board, this.playerKing, 2, (Rook) rookTile.getPiece(), rookTile.getTileCoordinate(), 3));
+                    }
                 }
             }
         }

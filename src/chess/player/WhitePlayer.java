@@ -41,33 +41,40 @@ public class WhitePlayer extends Player {
         final List<Move> kingCastles = new ArrayList<>();
         if (this.playerKing.isFirstMove() && !this.isInCheck()) {
             //white king side castle
-            if (!this.board.getTile(61).isOccupied() && !this.board.getTile(62).isOccupied()) {
+            if (!this.board.getTile(61).isOccupied() &&
+                !this.board.getTile(62).isOccupied()) {
                 final Tile rookTile = this.board.getTile(63);
-                if (rookTile.isOccupied() && rookTile.getPiece().isFirstMove()) {
+                if (rookTile.isOccupied() &&
+                    rookTile.getPiece().isFirstMove()) {
                     if (Player.calculateAttacksOnTile(61, opponentLegals).isEmpty() &&
-                            Player.calculateAttacksOnTile(62, opponentLegals).isEmpty() &&
-                            rookTile.getPiece().getPieceType().isRook()) {
+                        Player.calculateAttacksOnTile(62, opponentLegals).isEmpty() &&
+                        rookTile.getPiece().getPieceType().isRook()) {
                         kingCastles.add(new KingSideCastleMove(this.board,
-                                this.playerKing,
-                                62,
-                                (Rook) rookTile.getPiece(),
-                                rookTile.getTileCoordinate(),
-                                61));
+                                                               this.playerKing,
+                                                               62,
+                                                               (Rook) rookTile.getPiece(),
+                                                               rookTile.getTileCoordinate(),
+                                                               61));
                     }
                 }
             }
-            //white queen side castl
+            //white queen side castle
             if (!this.board.getTile(59).isOccupied() &&
-                    !this.board.getTile(58).isOccupied() &&
-                    !this.board.getTile(57).isOccupied()) {
+                !this.board.getTile(58).isOccupied() &&
+                !this.board.getTile(57).isOccupied()) {
                 final Tile rookTile = this.board.getTile(56);
-                if (rookTile.isOccupied() && rookTile.getPiece().isFirstMove()) {
-                    kingCastles.add(new QueenSideCastleMove(this.board,
-                            this.playerKing,
-                            58,
-                            (Rook) rookTile.getPiece(),
-                            rookTile.getTileCoordinate(),
-                            59));
+                if (rookTile.isOccupied() &&
+                    rookTile.getPiece().isFirstMove()) {
+                    if(Player.calculateAttacksOnTile(58, opponentLegals).isEmpty() &&
+                       Player.calculateAttacksOnTile(59, opponentLegals).isEmpty() &&
+                       rookTile.getPiece().getPieceType().isRook()) {
+                        kingCastles.add(new QueenSideCastleMove(this.board,
+                                                                this.playerKing,
+                                                                58,
+                                                                (Rook) rookTile.getPiece(),
+                                                                rookTile.getTileCoordinate(),
+                                                                59));
+                    }
                 }
             }
         }
