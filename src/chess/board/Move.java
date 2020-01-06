@@ -68,7 +68,6 @@ public abstract class Move {
     public Board execute() {
         final Builder builder = new Builder();
         for (final Piece piece : this.board.currentPlayer().getActivePieces()) {
-            //todo HASHCODE AND EQUALS FOR PIECES
             if (!this.movedPiece.equals(piece)) {
                 builder.setPiece(piece); //for tych ktorych nie ruszalismy, poprostu je wstaw
             }
@@ -78,21 +77,23 @@ public abstract class Move {
         }
         builder.setPiece(this.movedPiece.movePiece(this));
         builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+        System.out.println("TUTAJ");
         return builder.build();
     }
 
-    public static final class MajorMove extends Move {
+    public static class MajorMove extends Move {
+
         public MajorMove(final Board board,
-                         final Piece movedPiece,
-                         final int destanationCoordinate) {
-            super(board, movedPiece, destanationCoordinate);
+                         final Piece pieceMoved,
+                         final int destinationCoordinate) {
+            super(board, pieceMoved, destinationCoordinate);
         }
 
         @Override
-        public Board execute() {
-            return board;
-        }
+    public boolean equals(final Object other) {
+        return this == other || other instanceof MajorMove && super.equals(other);
     }
+}
 
     public static class AttackMove extends Move {
         final Piece attackedPiece;
@@ -121,6 +122,8 @@ public abstract class Move {
         }
         @Override
         public Board execute(){
+
+            System.out.println("TUTAJ3");
             return null;
         }
         @Override
@@ -180,6 +183,7 @@ public abstract class Move {
             builder.setPiece(movedPawn);
             builder.setEnPassantPawn(movedPawn);
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+            System.out.println("TUTAJ4");
             return builder.build();
         }
     }
@@ -225,6 +229,7 @@ public abstract class Move {
             builder.setPiece(this.movedPiece.movePiece(this));
             builder.setPiece(new Rook(this.castleRookDestination, this.castleRook.getPieceAlliance()));
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+            System.out.println("TUTAJ5");
             return builder.build();
         }
     }
@@ -276,6 +281,7 @@ public abstract class Move {
                                       final int destinationCoordinate){
             for(final Move move : board.getAllLegalMoves()){
                 if(move.getCurrentCoordinate() == currentCoordinate && move.getDestinationCoordinate() == destinationCoordinate){
+                    System.out.print("RUCH JEST DOBRY W CREATE MOVE");
                     return move;
                 }
             }

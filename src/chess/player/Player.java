@@ -54,6 +54,10 @@ public abstract class Player {
     }
 
     public boolean isMoveLegal(final Move move) {
+        System.out.println("SPRAWDZAM CZY LEGALMOVES CONTAINS TEN move");
+        System.out.println(move);
+        System.out.println(legalMoves);
+
         return this.legalMoves.contains(move);
     }
 
@@ -84,17 +88,22 @@ public abstract class Player {
     }
 
     public MoveTransition makeMove(final Move move) {
+        System.out.println("MAKEMOVE INITIATED");
         if (!isMoveLegal(move)) {
+            System.out.println("BAD MOVE");
             return new MoveTransition(this.board, move, MoveStatus.ILLEGAL_MOVE); // jak ruch jest niemozliwy, zwroc ten sam board, i wyrzuc illegal move
         }
+        System.out.println("GOOD MOVE");
         final Board transitionBoard = move.execute();
-
+        System.out.println("EXECUTED");
         final Collection<Move> kingAttacks = Player.calculateAttacksOnTile(transitionBoard.currentPlayer().getOpponent().getPlayerKing().getPiecePosition(), // wez pozycje krola przeciwnika(tak naprawde swoja) i sprawdz czy dostanie
                 transitionBoard.currentPlayer().getLegalMoves());
         if (!kingAttacks.isEmpty()) {
+            System.out.println("KING UNDER ATTACK");
             return new MoveTransition(this.board, move, MoveStatus.LEAVES_PLAYER_IN_CHECK); // jesli sa ataki na krola, tez zwroc ten sam board, i powiedz graczowi ze ma checka
         }
-        return new MoveTransition(transitionBoard, move, MoveStatus.DONE); //
+        System.out.println("RETURNING MOVE TRANSITION");
+        return new MoveTransition(transitionBoard, move, MoveStatus.DONE);
     }
 
     public abstract Collection<Piece> getActivePieces();
