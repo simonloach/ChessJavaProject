@@ -248,6 +248,7 @@ public class Table {
         public void drawTile(final Board board) {
             assignTileColor();
             assignTilePieceIcon(board);
+            highlightLegals(board);
             validate();
             repaint();
             System.out.print("DRAW TILE");
@@ -264,7 +265,7 @@ public class Table {
                 }
             }
         }
-        private void highLightLegels(final Board board){
+        private void highlightLegals(final Board board){
             if(highlightLegalMoves){
                 for(final Move move : pieceLegalMoves(board)){
                     if(move.getDestinationCoordinate()==this.tileId){
