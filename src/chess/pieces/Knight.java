@@ -15,8 +15,8 @@ import java.util.List;
 public class Knight extends Piece {
     private final static int[] CANDIDATES = {-17, -15, -10, 6, -6, 10, 15, 17}; // mozliwe ruchy nie uwzgledniajac wielkosci mapy, ani czy dana kratka nie jest zajmowana przez inna figure
 
-    public Knight(final int piecePosition, final Alliance pieceAlliance) {
-        super(PieceType.KNIGHT, piecePosition, pieceAlliance);
+    public Knight(final int piecePosition, final Alliance pieceAlliance, true) {
+        super(PieceType.KNIGHT, piecePosition, pieceAlliance, true);
     }
 
 
