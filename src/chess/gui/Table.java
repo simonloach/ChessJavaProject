@@ -39,13 +39,13 @@ public class Table {
 
     private boolean highlightLegalMoves;
 
-    private final static Dimension OUTER_FRAME_DIMENSION = new Dimension(1000, 1000);
+    private final static Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
     private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
     private static final Dimension TILE_PANEL_DIMENSION = new Dimension(10, 10);
     private static String DEFAULT_IMAGE_PATH = "src/chess/images/";
 
-    private final Color lightTileColor = Color.decode("#0FFF0F");
-    private final Color darkTileColor = Color.decode("#FFFFF0");
+    private final Color lightTileColor = Color.decode("#595959");
+    private final Color darkTileColor = Color.decode("#F2F2F2");
 
     public Table() {
         this.gameFrame = new JFrame("JChess");
