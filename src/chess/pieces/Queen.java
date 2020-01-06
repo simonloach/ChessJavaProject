@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.player.Alliance;
+import chess.Alliance;
 import chess.board.Board;
 import chess.board.BoardUtils;
 import chess.board.Move;
@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Queen extends Piece {
@@ -27,7 +28,6 @@ public class Queen extends Piece {
     @Override
     public Collection<Move> calculateLegalMoves(Board board) {
         final List<Move> legalMoves = new ArrayList<>();
-
         for (final int candidateCoordinateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {
             int candindateDestinationCoordinate = this.piecePosition;
             while (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
@@ -35,7 +35,11 @@ public class Queen extends Piece {
                         isEighthColumn(candindateDestinationCoordinate, candidateCoordinateOffset)) {
                     break;
                 }
+                System.out.println("PRZED"+candindateDestinationCoordinate);
                 candindateDestinationCoordinate += candidateCoordinateOffset;
+                System.out.print(candidateCoordinateOffset);
+                System.out.print("PO"+candindateDestinationCoordinate);
+                System.out.print(BoardUtils.isValidCandidate(candindateDestinationCoordinate));
                 if (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candindateDestinationCoordinate);
                     if (!candidateDestinationTile.isOccupied()) {
@@ -52,6 +56,8 @@ public class Queen extends Piece {
                 }
             }
         }
+        System.out.print("LEGAL MOVES:"+ImmutableList.copyOf(legalMoves));
+
         return ImmutableList.copyOf(legalMoves);
     }
 
