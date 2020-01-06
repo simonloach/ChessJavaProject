@@ -33,13 +33,13 @@ public class Table {
     private Tile destinationTile;
     private Piece humanMovedPiece;
 
-    private final static Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
+    private final static Dimension OUTER_FRAME_DIMENSION = new Dimension(1000, 1000);
     private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
     private static final Dimension TILE_PANEL_DIMENSION = new Dimension(10, 10);
     private static String DEFAULT_IMAGE_PATH = "src/chess/images/";
 
-    private final Color lightTileColor = Color.decode("#FF0000");
-    private final Color darkTileColor = Color.decode("#FFFF00");
+    private final Color lightTileColor = Color.decode("#0FFF0F");
+    private final Color darkTileColor = Color.decode("#FFFFF0");
 
     public Table() {
         this.gameFrame = new JFrame("JChess");
