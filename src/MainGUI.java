@@ -23,7 +23,7 @@ public class MainGUI extends JFrame{
         {
             if(c instanceof Container)
             {
-                if(c.getName() == "a8")
+                if(c.getName().equals("a8"))
                 {
                     c.setBackground(Color.RED);
                 }
