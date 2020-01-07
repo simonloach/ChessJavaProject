@@ -50,7 +50,6 @@ public class King extends Piece {
                         legalMoves.add(new AttackMove(board, this, currentCandidateDestinationCoordinate, pieceAtDest));
                     }
                 }
-
             }
         }
 

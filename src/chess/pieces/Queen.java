@@ -35,24 +35,26 @@ public class Queen extends Piece {
                         isEighthColumn(candindateDestinationCoordinate, candidateCoordinateOffset)) {
                     break;
                 }
-                System.out.println("PRZED"+candindateDestinationCoordinate);
+                System.out.println(" PRZED, CANDIDATE:  "+candindateDestinationCoordinate);
                 candindateDestinationCoordinate += candidateCoordinateOffset;
-                System.out.print(candidateCoordinateOffset);
-                System.out.print("PO"+candindateDestinationCoordinate);
-                System.out.print(BoardUtils.isValidCandidate(candindateDestinationCoordinate));
+                System.out.println(" OFFSET " + candidateCoordinateOffset);
+                System.out.println(" PO  "+candindateDestinationCoordinate);
+                System.out.println(BoardUtils.isValidCandidate(candindateDestinationCoordinate));
                 if (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candindateDestinationCoordinate);
                     if (!candidateDestinationTile.isOccupied()) {
+                        System.out.println("IS NOT OCCUPIED " + candindateDestinationCoordinate);
                         legalMoves.add(new Move.MajorMove(board, this, candindateDestinationCoordinate));
                     } else {
+                        System.out.println("IS OCCUPIED ");
                         final Piece pieceAtDest = candidateDestinationTile.getPiece();
                         final Alliance pieceAtDestAlliance = pieceAtDest.getPieceAlliance();
 
                         if (this.pieceAlliance != pieceAtDestAlliance) {
                             legalMoves.add(new Move.AttackMove(board, this, candindateDestinationCoordinate, pieceAtDest));
                         }
+                        break;
                     }
-                    break; // to elimnate Tile ktore sa zasloniete przez te ktore sa occupied
                 }
             }
         }

@@ -130,6 +130,14 @@ public class Board {
         return builder.build();
 
     }
+    public static Board createQueenBoard() {
+        final Builder builder = new Builder();
+        builder.setPiece(new Queen(3, Alliance.BLACK));
+        builder.setPiece(new Queen(59, Alliance.WHITE));
+        builder.setMoveMaker(Alliance.WHITE);
+        return builder.build();
+
+    }
 
     @Override
     public String toString() {

@@ -26,7 +26,7 @@ public class BoardUtils {
     }
 
     public static boolean isValidCandidate(int candidateDestinationCoord) {
-        return (0 <= candidateDestinationCoord && candidateDestinationCoord < NUM_TILES);
+        return (0 <= candidateDestinationCoord) && (candidateDestinationCoord < NUM_TILES);
     }
 
     private static boolean[] initColumn(int columnNumber) {

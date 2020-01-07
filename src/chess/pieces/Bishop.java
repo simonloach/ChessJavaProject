@@ -46,8 +46,8 @@ public class Bishop extends Piece {
                         if (this.pieceAlliance != pieceAtDestAlliance) {
                             legalMoves.add(new AttackMove(board, this, candindateDestinationCoordinate, pieceAtDest));
                         }
+                        break;
                     }
-                    break; // to elimnate Tile ktore sa zasloniete przez te ktore sa occupied
                 }
             }
         }
