@@ -54,7 +54,7 @@ public class Table {
         this.gameFrame.setJMenuBar(tableMenuBar);
         this.gameFrame.setSize(OUTER_FRAME_DIMENSION);
         this.chessBoard = Board.createStandardBoard();
-        this.highlightLegalMoves=true;
+        this.highlightLegalMoves = true;
         this.boardPanel = new BoardPanel();
         this.boardDirection = BoardDirection.NORMAL;
         this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
@@ -92,7 +92,7 @@ public class Table {
         return fileMenu;
     }
 
-    private JMenu createPreferencesMenu(){
+    private JMenu createPreferencesMenu() {
         final JMenu preferencesMenu = new JMenu("Preferences");
         final JMenuItem flipBoardMenuItem = new JMenuItem("Flip Board");
         flipBoardMenuItem.addActionListener(new ActionListener() {
@@ -104,18 +104,18 @@ public class Table {
         });
         preferencesMenu.add(flipBoardMenuItem);
         preferencesMenu.addSeparator();
-        final JCheckBoxMenuItem legalMoveHighlighterCheckbox = new JCheckBoxMenuItem("Highlight legal moves",false);
+        final JCheckBoxMenuItem legalMoveHighlighterCheckbox = new JCheckBoxMenuItem("Highlight legal moves", false);
         legalMoveHighlighterCheckbox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                highlightLegalMoves=legalMoveHighlighterCheckbox.isSelected();
+                highlightLegalMoves = legalMoveHighlighterCheckbox.isSelected();
             }
         });
         preferencesMenu.add(legalMoveHighlighterCheckbox);
         return preferencesMenu;
     }
 
-    public enum BoardDirection{
+    public enum BoardDirection {
         NORMAL {
             @Override
             List<TilePanel> traverse(List<TilePanel> boardTiles) {
@@ -127,7 +127,7 @@ public class Table {
                 return FLIPPED;
             }
         },
-        FLIPPED{
+        FLIPPED {
             @Override
             List<TilePanel> traverse(List<TilePanel> boardTiles) {
                 return Lists.reverse(boardTiles);
@@ -138,7 +138,9 @@ public class Table {
                 return NORMAL;
             }
         };
+
         abstract List<TilePanel> traverse(final List<TilePanel> boardTiles);
+
         abstract BoardDirection opposite();
     }
 
@@ -265,21 +267,23 @@ public class Table {
                 }
             }
         }
-        private void highlightLegals(final Board board){
-            if(highlightLegalMoves){
-                for(final Move move : pieceLegalMoves(board)){
-                    if(move.getDestinationCoordinate()==this.tileId){
-                        try{
+
+        private void highlightLegals(final Board board) {
+            if (highlightLegalMoves) {
+                for (final Move move : pieceLegalMoves(board)) {
+                    if (move.getDestinationCoordinate() == this.tileId) {
+                        try {
                             add(new JLabel(new ImageIcon(ImageIO.read(new File("src/chess/images/green_dot.png")))));
-                        } catch(Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
         }
-        private Collection<Move> pieceLegalMoves(final Board board){
-            if(humanMovedPiece != null && humanMovedPiece.getPieceAlliance() == board.currentPlayer().getAlliance()){
+
+        private Collection<Move> pieceLegalMoves(final Board board) {
+            if (humanMovedPiece != null && humanMovedPiece.getPieceAlliance() == board.currentPlayer().getAlliance()) {
                 return humanMovedPiece.calculateLegalMoves(board);
             }
             return Collections.emptyList();
