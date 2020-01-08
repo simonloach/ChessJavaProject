@@ -35,18 +35,12 @@ public class Queen extends Piece {
                         isEighthColumn(candindateDestinationCoordinate, candidateCoordinateOffset)) {
                     break;
                 }
-                System.out.println(" PRZED, CANDIDATE:  "+candindateDestinationCoordinate);
                 candindateDestinationCoordinate += candidateCoordinateOffset;
-                System.out.println(" OFFSET " + candidateCoordinateOffset);
-                System.out.println(" PO  "+candindateDestinationCoordinate);
-                System.out.println(BoardUtils.isValidCandidate(candindateDestinationCoordinate));
                 if (BoardUtils.isValidCandidate(candindateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candindateDestinationCoordinate);
                     if (!candidateDestinationTile.isOccupied()) {
-                        System.out.println("IS NOT OCCUPIED " + candindateDestinationCoordinate);
                         legalMoves.add(new Move.MajorMove(board, this, candindateDestinationCoordinate));
                     } else {
-                        System.out.println("IS OCCUPIED ");
                         final Piece pieceAtDest = candidateDestinationTile.getPiece();
                         final Alliance pieceAtDestAlliance = pieceAtDest.getPieceAlliance();
 
@@ -58,8 +52,6 @@ public class Queen extends Piece {
                 }
             }
         }
-        System.out.print("LEGAL MOVES:"+ImmutableList.copyOf(legalMoves));
-
         return ImmutableList.copyOf(legalMoves);
     }
 

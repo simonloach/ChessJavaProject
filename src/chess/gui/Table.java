@@ -167,7 +167,6 @@ public class Table {
             }
             validate();
             repaint();
-            System.out.println("DRAW BOARD");
         }
     }
 
@@ -187,12 +186,10 @@ public class Table {
                 @Override
                 public void mouseClicked(final MouseEvent mouseEvent) {
                     if (isRightMouseButton(mouseEvent)) {
-                        System.out.println("PRAWY");
                         sourceTile = null;
                         destinationTile = null;
                         humanMovedPiece = null;
                     } else if (isLeftMouseButton(mouseEvent)) {
-                        System.out.println("LEWY");
                         if (sourceTile == null) {
                             sourceTile = chessBoard.getTile(tileId);
                             humanMovedPiece = sourceTile.getPiece();
@@ -205,15 +202,12 @@ public class Table {
                             final Move move = Move.MoveFactory.createMove(chessBoard, sourceTile.getTileCoordinate(), destinationTile.getTileCoordinate());
                             final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
                             System.out.println(chessBoard);
-                            System.out.println("MAKE MOVE");
                             if (transition.getMoveStatus().isDone()) {
-                                System.out.println("IS DONE");
                                 chessBoard = transition.getTransitionBoard();
                             }
                             sourceTile = null;
                             destinationTile = null;
                             humanMovedPiece = null;
-                            System.out.println("NULLED DESTINATION ET");
                         }
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
@@ -253,7 +247,6 @@ public class Table {
             highlightLegals(board);
             validate();
             repaint();
-            System.out.print("DRAW TILE");
         }
 
         private void assignTilePieceIcon(final Board board) {
