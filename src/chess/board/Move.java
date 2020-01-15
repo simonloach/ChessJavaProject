@@ -10,8 +10,9 @@ public abstract class Move {
     protected final Board board;
     protected final Piece movedPiece;
     protected final int destinationCoordinate;
-    public static final Move NULL_MOVE = new NullMove();
     protected final boolean isFirstMove;
+
+    public static final Move NULL_MOVE = new NullMove();
 
     public Move(final Board board,
                 final Piece movedPiece,
