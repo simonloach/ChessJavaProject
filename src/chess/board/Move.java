@@ -4,6 +4,7 @@ package chess.board;
 import chess.pieces.Pawn;
 import chess.pieces.Piece;
 import chess.board.Board.Builder;
+import chess.pieces.Queen;
 import chess.pieces.Rook;
 
 public abstract class Move {
@@ -351,7 +352,10 @@ public abstract class Move {
                                   final int castleRookDestination) {
             super(board, movedPiece, destinationCoordinate, castleRook, castleRookStart, castleRookDestination);
         }
-
+        @Override
+        public boolean equals(final Object other){
+            return this == other || other instanceof KingSideCastleMove && super.equals(other);
+        }
         @Override
         public String toString() {
             return "O-O";
@@ -371,6 +375,10 @@ public abstract class Move {
         @Override
         public String toString() {
             return "O-O-O";
+        }
+        @Override
+        public boolean equals(final Object other){
+            return this == other || other instanceof QueenSideCastleMove && super.equals(other);
         }
     }
 
