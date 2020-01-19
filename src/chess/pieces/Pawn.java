@@ -54,6 +54,7 @@ public class Pawn extends Piece {
                     }
                 } else if (board.getEnPassantPawn() != null) {
                     if (board.getEnPassantPawn().getPiecePosition() == (this.piecePosition + (this.pieceAlliance.getOppositeDirection()))) {
+                        System.out.println(board.getEnPassantPawn().getPiecePosition());
                         final Piece pieceOnCandidate = board.getEnPassantPawn();
                         if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
                             System.out.println("DUPA2");
@@ -69,17 +70,18 @@ public class Pawn extends Piece {
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
                         legalMoves.add(new Move.PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
-                } else if (board.getEnPassantPawn() != null) {
-                    if (board.getEnPassantPawn().getPiecePosition() == (this.piecePosition - (this.pieceAlliance.getOppositeDirection())) ) {
-                        final Piece pieceOnCandidate = board.getEnPassantPawn();
-                        if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
-                            System.out.println("DUPA");
-                            legalMoves.add(new Move.PawnEnPassantAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
+                } else if(board.getEnPassantPawn() != null){
+                        if (board.getEnPassantPawn().getPiecePosition() == (this.piecePosition - (this.pieceAlliance.getOppositeDirection())) ) {
+                            System.out.println(board.getEnPassantPawn().getPiecePosition());
+                            final Piece pieceOnCandidate = board.getEnPassantPawn();
+                            if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
+                                System.out.println("DUPA");
+                                legalMoves.add(new Move.PawnEnPassantAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
+                            }
                         }
                     }
                 }
             }
-        }
         return ImmutableList.copyOf(legalMoves);
     }
 

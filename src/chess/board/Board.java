@@ -183,7 +183,7 @@ public class Board {
 
         public Builder setEnPassantPawn(final Pawn enPassantPawn) {
             this.enPassantPawn = enPassantPawn;
-            System.out.println("SETENPASSANT PAWN "+ enPassantPawn);
+            System.out.println("SET EN PASSANT PAWN "+ enPassantPawn.getPiecePosition());
             return this;
         }
     }
