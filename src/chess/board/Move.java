@@ -92,7 +92,6 @@ public abstract class Move {
         }
         builder.setPiece(this.movedPiece.movePiece(this));
         builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
-        System.out.println("ZROBILEM RUCH Z" + getCurrentCoordinate() + "NA" + getDestinationCoordinate());
 
         return builder.build();
     }
@@ -198,7 +197,6 @@ public abstract class Move {
                               final int destanationCoordinate,
                               final Piece attackedPiece) {
             super(board, movedPiece, destanationCoordinate, attackedPiece);
-            System.out.println("PIONEK ATTACK MOVE Z " + movedPiece.getPiecePosition() + " NA " + destanationCoordinate + " KONSTRUKTOR HERE");
         }
 
         @Override
@@ -267,7 +265,6 @@ public abstract class Move {
             builder.setPiece(movedPawn);
             builder.setEnPassantPawn(movedPawn);
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
-            System.out.println("TUTAJ4");
             return builder.build();
         }
 
@@ -414,7 +411,6 @@ public abstract class Move {
                                       final int destinationCoordinate) {
             for (final Move move : board.getAllLegalMoves()) {
                 if (move.getCurrentCoordinate() == currentCoordinate && move.getDestinationCoordinate() == destinationCoordinate) {
-                    System.out.print("RUCH JEST DOBRY W CREATE MOVE");
                     return move;
                 }
             }

@@ -34,7 +34,6 @@ public class Board {
     }
 
     public Iterable<Move> getAllLegalMoves(){
-        System.out.println(Iterables.unmodifiableIterable(Iterables.concat(this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves())));
         return Iterables.unmodifiableIterable(Iterables.concat(this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves()));
     }
 

@@ -50,7 +50,6 @@ public class Pawn extends Piece {
                 if (board.getTile(candidateDestinationCoordinate).isOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
-                        System.out.println("PIONEK Z POLA" + this.piecePosition + "MOZE ZBIC"+ candidateDestinationCoordinate) ;
                         legalMoves.add(new Move.PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
                 }
@@ -60,7 +59,6 @@ public class Pawn extends Piece {
                 if (board.getTile(candidateDestinationCoordinate).isOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
-                        System.out.println("PIONEK Z POLA" + this.piecePosition + "MOZE ZBIC"+ candidateDestinationCoordinate) ;
                         legalMoves.add(new Move.PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
                 }
