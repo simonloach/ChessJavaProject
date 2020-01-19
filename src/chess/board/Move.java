@@ -316,10 +316,29 @@ public abstract class Move {
                 builder.setPiece(piece);
             }
             builder.setPiece(this.movedPiece.movePiece(this));
+            //TODO dupa
             builder.setPiece(new Rook(this.castleRookDestination, this.castleRook.getPieceAlliance()));
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
-            System.out.println("TUTAJ5");
             return builder.build();
+        }
+        @Override
+        public int hashCode(){
+            final int prime = 31;
+            int result = super.hashCode();
+            result = prime*result+this.castleRook.hashCode();
+            result = prime*result+this.castleRookDestination;
+            return result;
+        }
+        @Override
+        public boolean equals(final Object other){
+            if(this == other){
+                return true;
+            }
+            if(!(other instanceof CastleMove)){
+                return false;
+            }
+            final CastleMove otherCastleMove = (CastleMove)other;
+            return super.equals(otherCastleMove) && this.castleRook.equals(otherCastleMove.getCastleRook());
         }
     }
 
