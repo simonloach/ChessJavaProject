@@ -38,7 +38,7 @@ public class Pawn extends Piece {
                 legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
             } else if (currentCandidateOffset == 16 && this.isFirstMove() && // czy to pierwszy ruch
                     ((BoardUtils.SECOND_ROW[this.piecePosition] && this.getPieceAlliance().isBlack()) || // jesli jest czarny i w drugim row
-                            (BoardUtils.SEVENTH_ROW[this.piecePosition]) && this.getPieceAlliance().isWhite())) { // jesli jest bialy i w siodmym row
+                            ((BoardUtils.SEVENTH_ROW[this.piecePosition]) && this.getPieceAlliance().isWhite()))) { // jesli jest bialy i w siodmym row
                 final int behindCandidateDestinationCoordinate = this.piecePosition + (this.pieceAlliance.getDirection() * 8);
                 if (!board.getTile(behindCandidateDestinationCoordinate).isOccupied() &&
                         !board.getTile(candidateDestinationCoordinate).isOccupied()) {
@@ -50,20 +50,23 @@ public class Pawn extends Piece {
                 if (board.getTile(candidateDestinationCoordinate).isOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
+                        System.out.println("PIONEK Z POLA" + this.piecePosition + "MOZE ZBIC"+ candidateDestinationCoordinate) ;
                         legalMoves.add(new Move.PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
                 }
-            } else if (currentCandidateOffset == 9 && //warunek glowny
-                    !((BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack()) || // czy jest w eight column i czy jest czarny lub
+            } else if (currentCandidateOffset == 9 &&
+                    !((BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack()) ||
                             (BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isWhite()))) {
                 if (board.getTile(candidateDestinationCoordinate).isOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
-                    if (this.pieceAlliance == pieceOnCandidate.getPieceAlliance()) {
-                        legalMoves.add(new Move.PawnAttackMove(board, this, currentCandidateOffset, pieceOnCandidate));
+                    if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
+                        System.out.println("PIONEK Z POLA" + this.piecePosition + "MOZE ZBIC"+ candidateDestinationCoordinate) ;
+                        legalMoves.add(new Move.PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
                 }
             }
         }
+        System.out.println(legalMoves);
         return ImmutableList.copyOf(legalMoves);
     }
 

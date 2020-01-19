@@ -301,6 +301,7 @@ public class Table {
                 for (final Move move : pieceLegalMoves(board)) {
                     if (move.getDestinationCoordinate() == this.tileId) {
                         try {
+                            System.out.println(move.getDestinationCoordinate());
                             add(new JLabel(new ImageIcon(ImageIO.read(new File("src/chess/images/green_dot.png")))));
                         } catch (Exception e) {
                             e.printStackTrace();

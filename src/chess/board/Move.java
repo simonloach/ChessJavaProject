@@ -91,7 +91,8 @@ public abstract class Move {
         }
         builder.setPiece(this.movedPiece.movePiece(this));
         builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
-        System.out.println("TUTAJ");
+        System.out.println("ZROBILEM RUCH Z" + getCurrentCoordinate() + "NA" + getDestinationCoordinate());
+
         return builder.build();
     }
 
@@ -115,7 +116,7 @@ public abstract class Move {
     }
 
     public static class AttackMove extends Move {
-        final Piece attackedPiece;
+        private final Piece attackedPiece;
 
         public AttackMove(final Board board,
                           final Piece movedPiece,
@@ -143,13 +144,6 @@ public abstract class Move {
         }
 
         @Override
-        public Board execute() {
-
-            System.out.println("TUTAJ3");
-            return null;
-        }
-
-        @Override
         public boolean isAttack() {
             return true;
         }
@@ -174,6 +168,16 @@ public abstract class Move {
                               final int destanationCoordinate,
                               final Piece attackedPiece) {
             super(board, movedPiece, destanationCoordinate, attackedPiece);
+            System.out.println("PIONEK ATTACK MOVE Z " + movedPiece.getPiecePosition() + " NA "+ destanationCoordinate + " KONSTRUKTOR HERE");
+        }
+        @Override
+        public boolean equals(final Object other){
+            return this == other || other instanceof PawnAttackMove && super.equals(other);
+        }
+        @Override
+        public String toString(){
+            return BoardUtils.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).substring(0,1)+"x"+
+                    BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
         }
     }
 
