@@ -66,7 +66,6 @@ public class Pawn extends Piece {
                 }
             }
         }
-        System.out.println(legalMoves);
         return ImmutableList.copyOf(legalMoves);
     }
 

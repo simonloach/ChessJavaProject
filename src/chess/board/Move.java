@@ -96,6 +96,25 @@ public abstract class Move {
         return builder.build();
     }
 
+    public static class MajorAttackMove extends AttackMove {
+        public MajorAttackMove(final Board board,
+                               final Piece movedPiece,
+                               final int destinationCoordinate,
+                               final Piece pieceAttacked) {
+            super(board, movedPiece, destinationCoordinate, pieceAttacked);
+        }
+
+        @Override
+        public boolean equals(final Object other){
+            return this == other || other instanceof MajorAttackMove && super.equals(other);
+        }
+        @Override
+        public String toString(){
+            return movedPiece.getPieceType()+BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
+        }
+
+    }
+
     public static class MajorMove extends Move {
 
         public MajorMove(final Board board,
@@ -160,6 +179,16 @@ public abstract class Move {
                         final int destinationCoordinate) {
             super(board, movedPiece, destinationCoordinate);
         }
+
+        @Override
+        public boolean equals(final Object other) {
+            return this == other || other instanceof PawnMove && super.equals(other);
+        }
+
+        @Override
+        public String toString() {
+            return BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
+        }
     }
 
     public static class PawnAttackMove extends AttackMove {
@@ -168,15 +197,17 @@ public abstract class Move {
                               final int destanationCoordinate,
                               final Piece attackedPiece) {
             super(board, movedPiece, destanationCoordinate, attackedPiece);
-            System.out.println("PIONEK ATTACK MOVE Z " + movedPiece.getPiecePosition() + " NA "+ destanationCoordinate + " KONSTRUKTOR HERE");
+            System.out.println("PIONEK ATTACK MOVE Z " + movedPiece.getPiecePosition() + " NA " + destanationCoordinate + " KONSTRUKTOR HERE");
         }
+
         @Override
-        public boolean equals(final Object other){
+        public boolean equals(final Object other) {
             return this == other || other instanceof PawnAttackMove && super.equals(other);
         }
+
         @Override
-        public String toString(){
-            return BoardUtils.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).substring(0,1)+"x"+
+        public String toString() {
+            return BoardUtils.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).substring(0, 1) + "x" +
                     BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
         }
     }
@@ -187,6 +218,29 @@ public abstract class Move {
                                        final int destanationCoordinate,
                                        final Piece attackedPiece) {
             super(board, movedPiece, destanationCoordinate, attackedPiece);
+        }
+        @Override
+        public boolean equals(final Object other){
+            return this == other || other instanceof PawnAttackMove && super.equals(other);
+        }
+        @Override
+        public Board execute(){
+            final Builder builder = new Builder();
+            for(final Piece piece : this.board.currentPlayer().getActivePieces()){
+                if(!this.movedPiece.equals(piece)){
+                    builder.setPiece(piece);
+                }
+            }
+            for(final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()){
+                if(!piece.equals(this.getAttackedPiece())){
+                    builder.setPiece(piece);
+                }
+            }
+            builder.setPiece(this.movedPiece.movePiece(this));
+            builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+            return builder.build();
+
+
         }
     }
 
@@ -313,11 +367,12 @@ public abstract class Move {
         }
 
         @Override
-        public int getCurrentCoordinate(){
+        public int getCurrentCoordinate() {
             return -1;
         }
+
         @Override
-        public int getDestinationCoordinate(){
+        public int getDestinationCoordinate() {
             return -1;
         }
     }
