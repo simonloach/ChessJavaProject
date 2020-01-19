@@ -24,11 +24,11 @@ public abstract class Move {
     }
 
     private Move(final Board board,
-                 final int destinationCoordinate){
-        this.board=board;
-        this.destinationCoordinate=destinationCoordinate;
-        this.movedPiece=null;
-        this.isFirstMove=false;
+                 final int destinationCoordinate) {
+        this.board = board;
+        this.destinationCoordinate = destinationCoordinate;
+        this.movedPiece = null;
+        this.isFirstMove = false;
     }
 
     public Piece getMovedPiece() {
@@ -107,9 +107,10 @@ public abstract class Move {
         public boolean equals(final Object other) {
             return this == other || other instanceof MajorMove && super.equals(other);
         }
+
         @Override
-        public String toString(){
-            return movedPiece.getPieceType().toString()+BoardUtils.getPositionCoordinate(this.destinationCoordinate);
+        public String toString() {
+            return movedPiece.getPieceType().toString() + BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
         }
     }
 
@@ -210,6 +211,11 @@ public abstract class Move {
             System.out.println("TUTAJ4");
             return builder.build();
         }
+
+        @Override
+        public String toString() {
+            return BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
+        }
     }
 
     static abstract class CastleMove extends Move {
@@ -294,7 +300,7 @@ public abstract class Move {
     public static final class NullMove extends Move {
 
         public NullMove() {
-            super(null, null, -1);
+            super(null, -1);
         }
 
         @Override
@@ -320,6 +326,4 @@ public abstract class Move {
             return NULL_MOVE;
         }
     }
-
-
 }
