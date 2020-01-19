@@ -36,22 +36,30 @@ public class Pawn extends Piece {
             }
             if (currentCandidateOffset == 8 && !board.getTile(candidateDestinationCoordinate).isOccupied()) {
                 legalMoves.add(new Move.PawnMove(board, this, candidateDestinationCoordinate));
-            } else if (currentCandidateOffset == 16 && this.isFirstMove() && // czy to pierwszy ruch
-                    ((BoardUtils.SECOND_ROW[this.piecePosition] && this.getPieceAlliance().isBlack()) || // jesli jest czarny i w drugim row
-                            ((BoardUtils.SEVENTH_ROW[this.piecePosition]) && this.getPieceAlliance().isWhite()))) { // jesli jest bialy i w siodmym row
+            } else if (currentCandidateOffset == 16 && this.isFirstMove() &&
+                    ((BoardUtils.SECOND_ROW[this.piecePosition] && this.getPieceAlliance().isBlack()) ||
+                            ((BoardUtils.SEVENTH_ROW[this.piecePosition]) && this.getPieceAlliance().isWhite()))) {
                 final int behindCandidateDestinationCoordinate = this.piecePosition + (this.pieceAlliance.getDirection() * 8);
                 if (!board.getTile(behindCandidateDestinationCoordinate).isOccupied() &&
                         !board.getTile(candidateDestinationCoordinate).isOccupied()) {
                     legalMoves.add(new Move.PawnJump(board, this, candidateDestinationCoordinate));
                 }
-            } else if (currentCandidateOffset == 7 && //warunek glowny
-                    !((BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceAlliance.isWhite()) || // czy jest w eight column i czy jest bialy lub
-                            (BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack()))) { // czy jest w first column i czy jest czarny
+            } else if (currentCandidateOffset == 7 &&
+                    !((BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceAlliance.isWhite()) ||
+                            (BoardUtils.FIRST_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack()))) {
                 if (board.getTile(candidateDestinationCoordinate).isOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
                         legalMoves.add(new Move.PawnAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
                     }
+                } else if (board.getEnPassantPawn() != null) {
+                    if (board.getEnPassantPawn().getPiecePosition() == (this.piecePosition + (this.getPieceAlliance().getOppositeDirection()))) {
+                        final Piece pieceOnCandidate = board.getEnPassantPawn();
+                        if (this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
+                            legalMoves.add(new Move.PawnEnPassantAttackMove(board, this, candidateDestinationCoordinate, pieceOnCandidate));
+                        }
+                    }
+
                 }
             } else if (currentCandidateOffset == 9 &&
                     !((BoardUtils.EIGHTH_COLUMN[this.piecePosition] && this.pieceAlliance.isBlack()) ||
