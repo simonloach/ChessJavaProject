@@ -181,8 +181,10 @@ public class Board {
             return new Board(this);
         }
 
-        public void setEnPassantPawn(Pawn movedPawn) {
+        public Builder setEnPassantPawn(final Pawn enPassantPawn) {
             this.enPassantPawn = enPassantPawn;
+            System.out.println("SETENPASSANT PAWN "+ enPassantPawn);
+            return this;
         }
     }
 }
