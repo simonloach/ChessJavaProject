@@ -35,7 +35,7 @@ public class Pawn extends Piece {
                 continue;
             }
             if (currentCandidateOffset == 8 && !board.getTile(candidateDestinationCoordinate).isOccupied()) {
-                legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
+                legalMoves.add(new Move.PawnMove(board, this, candidateDestinationCoordinate));
             } else if (currentCandidateOffset == 16 && this.isFirstMove() && // czy to pierwszy ruch
                     ((BoardUtils.SECOND_ROW[this.piecePosition] && this.getPieceAlliance().isBlack()) || // jesli jest czarny i w drugim row
                             ((BoardUtils.SEVENTH_ROW[this.piecePosition]) && this.getPieceAlliance().isWhite()))) { // jesli jest bialy i w siodmym row
