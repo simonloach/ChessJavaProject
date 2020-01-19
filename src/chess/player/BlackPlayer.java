@@ -1,6 +1,5 @@
 package chess.player;
 
-import chess.Alliance;
 import chess.board.Board;
 import chess.board.Move;
 import chess.board.Move.KingSideCastleMove;

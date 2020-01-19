@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.Alliance;
+import chess.player.Alliance;
 import chess.board.Board;
 import chess.board.Move;
 

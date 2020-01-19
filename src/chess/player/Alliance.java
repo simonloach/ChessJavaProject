@@ -1,4 +1,4 @@
-package chess;
+package chess.player;
 
 import chess.player.BlackPlayer;
 import chess.player.Player;

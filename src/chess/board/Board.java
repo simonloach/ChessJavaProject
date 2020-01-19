@@ -1,6 +1,6 @@
 package chess.board;
 
-import chess.Alliance;
+import chess.player.Alliance;
 import chess.pieces.*;
 import chess.player.BlackPlayer;
 import chess.player.Player;

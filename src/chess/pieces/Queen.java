@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.Alliance;
+import chess.player.Alliance;
 import chess.board.Board;
 import chess.board.BoardUtils;
 import chess.board.Move;
@@ -9,7 +9,6 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Queen extends Piece {
