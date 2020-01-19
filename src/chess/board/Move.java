@@ -39,7 +39,7 @@ public abstract class Move {
         return this.destinationCoordinate;
     }
 
-    private int getCurrentCoordinate() {
+    public int getCurrentCoordinate() {
         return this.getMovedPiece().getPiecePosition();
     }
 
@@ -300,12 +300,21 @@ public abstract class Move {
     public static final class NullMove extends Move {
 
         public NullMove() {
-            super(null, -1);
+            super(null, 65);
         }
 
         @Override
         public Board execute() {
             throw new RuntimeException("cannot execute the NULLMOVE!");
+        }
+
+        @Override
+        public int getCurrentCoordinate(){
+            return -1;
+        }
+        @Override
+        public int getDestinationCoordinate(){
+            return -1;
         }
     }
 

@@ -55,10 +55,6 @@ public abstract class Player {
     }
 
     public boolean isMoveLegal(final Move move) {
-        System.out.println("SPRAWDZAM CZY LEGALMOVES CONTAINS TEN move");
-        System.out.println(move);
-        System.out.println(legalMoves);
-
         return this.legalMoves.contains(move);
     }
 
