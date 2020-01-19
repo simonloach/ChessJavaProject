@@ -21,8 +21,8 @@ public class BoardUtils {
 
     public static final int NUM_TILES = 64;
     public static final int NUM_TILES_PER_ROW = 8;
-    public static final String[] ALGEBREIC_NOTATION = initializeAlgebraicNotation();
-    public static final Map<String, Integer> POSITION_TO_COORDINATE = initializePositionToCoordinateMap();
+    public static final String[] ALGEBREIC_NOTATION; = initializeAlgebraicNotation();
+    public static final Map<String, Integer> POSITION_TO_COORDINATE; = initializePositionToCoordinateMap();
 
 
     private BoardUtils() {

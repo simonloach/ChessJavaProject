@@ -2,11 +2,16 @@ package chess.gui;
 
 import chess.board.Move;
 import chess.pieces.Piece;
+import com.google.common.primitives.Ints;
 
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.*;
 import java.awt.*;
 
 public class TakenPiecesPanel extends JPanel {
@@ -49,6 +54,43 @@ public class TakenPiecesPanel extends JPanel {
                 }
             }
         }
+        Collections.sort(whiteTakenPieces, new Comparator<Piece>(){
+            @Override
+            public int compare(Piece o1, Piece o2) {
+                return Ints.compare(o1.getPieceValue(), o2.getPieceValue());
+            }
+        });
+        Collections.sort(blackTakenPieces, new Comparator<Piece>(){
+            @Override
+            public int compare(Piece o1, Piece o2) {
+                return Ints.compare(o1.getPieceValue(), o2.getPieceValue());
+            }
+        });
+
+        for(final Piece takenPiece:whiteTakenPieces){
+            try {
+                final BufferedImage image = ImageIO.read(new File("src/chess/images/" + takenPiece.getPieceAlliance().toString().substring(0,1)+" "+ takenPiece.toString()));
+                final ImageIcon icon = new ImageIcon(image);
+                final JLabel imageLabel = new JLabel();
+                this.southPanel.add(imageLabel);
+            }
+            catch(final IOException e){
+                e.printStackTrace();
+            }
+        }
+        for(final Piece takenPiece:blackTakenPieces){
+            try {
+                final BufferedImage image = ImageIO.read(new File("src/chess/images/" + takenPiece.getPieceAlliance().toString().substring(0,1)+" "+ takenPiece.toString()));
+                final ImageIcon icon = new ImageIcon(image);
+                final JLabel imageLabel = new JLabel();
+                this.northPanel.add(imageLabel);
+            }
+            catch(final IOException e){
+                e.printStackTrace();
+            }
+        }
+
+
     }
 }
 
