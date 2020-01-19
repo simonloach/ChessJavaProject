@@ -54,18 +54,8 @@ public class TakenPiecesPanel extends JPanel {
                 }
             }
         }
-        Collections.sort(whiteTakenPieces, new Comparator<Piece>(){
-            @Override
-            public int compare(Piece o1, Piece o2) {
-                return Ints.compare(o1.getPieceValue(), o2.getPieceValue());
-            }
-        });
-        Collections.sort(blackTakenPieces, new Comparator<Piece>(){
-            @Override
-            public int compare(Piece o1, Piece o2) {
-                return Ints.compare(o1.getPieceValue(), o2.getPieceValue());
-            }
-        });
+        Collections.sort(whiteTakenPieces, (o1, o2) -> Ints.compare(o1.getPieceValue(), o2.getPieceValue()));
+        Collections.sort(blackTakenPieces, (o1, o2) -> Ints.compare(o1.getPieceValue(), o2.getPieceValue()));
 
         for(final Piece takenPiece:whiteTakenPieces){
             try {
@@ -74,10 +64,10 @@ public class TakenPiecesPanel extends JPanel {
                 final ImageIcon icon = new ImageIcon(image);
                 final JLabel imageLabel = new JLabel(new ImageIcon(icon.getImage().getScaledInstance(
                         icon.getIconWidth() - 15, icon.getIconWidth() - 15, Image.SCALE_SMOOTH)));
-                this.southPanel.add(imageLabel);
+                this.northPanel.add(imageLabel);
             }
             catch(final IOException e){
-                System.out.println("BLAD IO");
+                System.out.println("BLAD IOExceotion");
                 e.printStackTrace();
             }
         }
@@ -88,10 +78,10 @@ public class TakenPiecesPanel extends JPanel {
                 final ImageIcon icon = new ImageIcon(image);
                 final JLabel imageLabel = new JLabel(new ImageIcon(icon.getImage().getScaledInstance(
                         icon.getIconWidth() - 15, icon.getIconWidth() - 15, Image.SCALE_SMOOTH)));
-                this.northPanel.add(imageLabel);
+                this.southPanel.add(imageLabel);
             }
             catch(final IOException e){
-                System.out.println("BLAD IO");
+                System.out.println("BLAD IOExceotion");
                 e.printStackTrace();
             }
         }
