@@ -111,7 +111,7 @@ public class Table {
         });
         preferencesMenu.add(flipBoardMenuItem);
         preferencesMenu.addSeparator();
-        final JCheckBoxMenuItem legalMoveHighlighterCheckbox = new JCheckBoxMenuItem("Highlight legal moves", false);
+        final JCheckBoxMenuItem legalMoveHighlighterCheckbox = new JCheckBoxMenuItem("Highlight legal moves", true);
         legalMoveHighlighterCheckbox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
